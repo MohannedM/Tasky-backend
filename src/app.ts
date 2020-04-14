@@ -28,7 +28,7 @@ app.use((err: JsonError, _req: Request, res: Response, _next: NextFunction)=>{
     res.status(err.statusCode).json({message: err.message});
 })
 
-mongoose.connect("mongodb+srv://mohannedm:zip123@cluster0-usvsi.mongodb.net/test?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://mohannedm:zip123@cluster0-usvsi.mongodb.net/tasky?retryWrites=true&w=majority")
 .then(() => {
     app.listen("8080");
 });

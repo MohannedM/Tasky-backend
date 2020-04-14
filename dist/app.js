@@ -25,7 +25,7 @@ app.use((err, _req, res, _next) => {
     }
     res.status(err.statusCode).json({ message: err.message });
 });
-mongoose_1.default.connect("mongodb+srv://mohannedm:zip123@cluster0-usvsi.mongodb.net/test?retryWrites=true&w=majority")
+mongoose_1.default.connect("mongodb+srv://mohannedm:zip123@cluster0-usvsi.mongodb.net/tasky?retryWrites=true&w=majority")
     .then(() => {
     app.listen("8080");
 });
