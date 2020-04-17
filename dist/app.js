@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = require("body-parser");
 const auth_1 = __importDefault(require("./routes/auth"));
+const tasks_1 = __importDefault(require("./routes/tasks"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const app = express_1.default();
 app.use(body_parser_1.json());
@@ -16,10 +17,8 @@ app.use((req, res, next) => {
     next();
 });
 app.use('/auth', auth_1.default);
+app.use('/tasks', tasks_1.default);
 app.use((err, _req, res, _next) => {
-    if (!err.message) {
-        err.message = "Something went wrong";
-    }
     if (!err.statusCode) {
         err.statusCode = 500;
     }

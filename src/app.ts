@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import {json} from 'body-parser';
 import {JsonError} from './helpers/interfaces.module';
 import authRoutes from './routes/auth';
+import tasksRoutes from './routes/tasks';
 import mongoose from 'mongoose';
 
 const app = express();
@@ -17,11 +18,9 @@ app.use((req, res, next)=>{
 
 
 app.use('/auth', authRoutes);
+app.use('/tasks', tasksRoutes);
 
 app.use((err: JsonError, _req: Request, res: Response, _next: NextFunction)=>{
-    if(!err.message){
-        err.message = "Something went wrong";
-    }
     if(!err.statusCode){
         err.statusCode = 500;
     }

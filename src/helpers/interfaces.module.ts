@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import express, {RequestHandler} from 'express'
 export interface JsonError extends Error{
     statusCode?: number;
 }
@@ -19,4 +20,26 @@ export interface taskDocument extends mongoose.Document{
     status: string;
     createdBy: userDocument;
     assignedTo?: userDocument;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export interface authRequest extends express.Request{
+    isAuth?: boolean;
+    userId?: string | null;
+}
+
+export interface jwtObject{
+    _id: string;
+    email: string;
+    iat: number;
+    exp: number;
+}
+
+export interface newTaskType{
+    title: string;
+    description: string;
+    dueDate: number;
+    assignedTo?: string;
+    createdBy: string | userDocument;
 }
