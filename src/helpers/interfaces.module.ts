@@ -9,8 +9,8 @@ export interface userDocument extends mongoose.Document{
     lastName: string;
     email: string;
     password: string;
-    tasksCreated?: [taskDocument];
-    tasksAssigned?: [taskDocument];
+    tasksCreated?: mongoose.Types.Array<taskDocument>;
+    tasksAssigned?: mongoose.Types.Array<taskDocument>;
 }
 
 export interface taskDocument extends mongoose.Document{
@@ -19,7 +19,7 @@ export interface taskDocument extends mongoose.Document{
     dueDate: number;
     status: string;
     createdBy: userDocument;
-    assignedTo?: userDocument;
+    assignedTo: userDocument;
     createdAt: Date;
     updatedAt: Date;
 }

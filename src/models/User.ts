@@ -19,18 +19,14 @@ const userSchema = new Schema({
         type: String
     },
     tasksCreated: [{
-        task: {
-            type: Schema.Types.ObjectId,
-            required: true,
-            ref: 'Task'
-        }
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'Task'
     }],
     tasksAssigned: [{
-        task: {
-            type: Schema.Types.ObjectId,
-            required: true,
-            ref: 'Task'
-        }
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'Task'
     }]
 });
 

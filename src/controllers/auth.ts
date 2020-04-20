@@ -4,6 +4,7 @@ import {validationResult} from 'express-validator';
 import bcrypt from 'bcryptjs';
 import mongoose from 'mongoose';
 import * as helperFunctions from '../helpers/helperFunctions'
+import { authRequest, userDocument } from '../helpers/interfaces.module';
 
 export const login: RequestHandler = async (req, res, next) => {
   try{
@@ -80,3 +81,27 @@ export const register: RequestHandler = async (req, res, next) => {
       next(err);
     }  
 } 
+
+export const getUsersInfo: RequestHandler = async (req: authRequest, res, next) => {
+  try{
+    if(!req.isAuth || !req.userId){
+      helperFunctions.errorThrower("Unauthorized", 401);
+      return;
+    }
+
+    const users = await User.find();
+    const usersInfo = users.map((user: userDocument)=>{
+      return {
+        id: user._id.toString(),
+        name: user.firstName + ' ' + user.lastName
+      }
+    })
+    res.status(200).json({users: usersInfo});
+
+  }catch(err){
+    if(!err.statusCode){
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+}

@@ -1,6 +1,7 @@
 import {Router} from 'express';
 import {check} from 'express-validator';
 import * as authControllers from '../controllers/auth';
+import isAuth from '../middlewares/is-auth';
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.post("/register", [
     check('password').trim().isLength({min: 6, max: 20})
 ], authControllers.register);
 
+router.get("/usernames", isAuth, authControllers.getUsersInfo);
 
 export default router;

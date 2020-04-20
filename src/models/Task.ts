@@ -25,7 +25,8 @@ const taskSchema = new Schema({
     },
     assignedTo: {
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        required: true
     }
 }, {timestamps: true});
 

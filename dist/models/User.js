@@ -26,18 +26,14 @@ const userSchema = new mongoose_1.Schema({
         type: String
     },
     tasksCreated: [{
-            task: {
-                type: mongoose_1.Schema.Types.ObjectId,
-                required: true,
-                ref: 'Task'
-            }
+            type: mongoose_1.Schema.Types.ObjectId,
+            required: true,
+            ref: 'Task'
         }],
     tasksAssigned: [{
-            task: {
-                type: mongoose_1.Schema.Types.ObjectId,
-                required: true,
-                ref: 'Task'
-            }
+            type: mongoose_1.Schema.Types.ObjectId,
+            required: true,
+            ref: 'Task'
         }]
 });
 exports.default = mongoose_1.default.model('User', userSchema);

@@ -80,3 +80,25 @@ exports.register = async (req, res, next) => {
         next(err);
     }
 };
+exports.getUsersInfo = async (req, res, next) => {
+    try {
+        if (!req.isAuth || !req.userId) {
+            helperFunctions.errorThrower("Unauthorized", 401);
+            return;
+        }
+        const users = await User_1.default.find();
+        const usersInfo = users.map((user) => {
+            return {
+                id: user._id.toString(),
+                name: user.firstName + ' ' + user.lastName
+            };
+        });
+        res.status(200).json({ users: usersInfo });
+    }
+    catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    }
+};
